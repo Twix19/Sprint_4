@@ -1,14 +1,16 @@
 package pageobjects;
-import org.junit.Assert;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 
 public class SecondCreateOrderPage {
     WebDriver driver;
+
     public SecondCreateOrderPage(WebDriver driver) {
         this.driver = driver;
     }
+
     //Нажимаем на кнопку "Когда привезти самокат"
     private By dataElement = By.xpath(".//input[contains(@placeholder,'привезти самокат')]");
     //Выбираем дату
@@ -34,39 +36,46 @@ public class SecondCreateOrderPage {
     private By orderConfirm = By.xpath(".//div[contains(@class,'Order_Header__BZXOb')]");
 
 
-    public void arrivalDateOfScooter(){
+    public void arrivalDateOfScooter() {
         driver.findElement(dataElement).click();
         driver.findElement(chooseDataElement).click();
     }
-    public void arrivalSecondDateOfScooter(){
+
+    public void arrivalSecondDateOfScooter() {
         driver.findElement(dataElement).click();
         driver.findElement(chooseSecondDataElement).click();
     }
-    public void rentalPeriod(){
+
+    public void rentalPeriod() {
         driver.findElement(clickRentalPeriod).click();
         driver.findElement(chooseRentalPeriod).click();
     }
-    public void secondRentalPeriod(){
+
+    public void secondRentalPeriod() {
         driver.findElement(clickRentalPeriod).click();
         driver.findElement(chooseSecondRentalPeriod).click();
     }
-    public void scooterColor(){
+
+    public void scooterColor() {
         driver.findElement(scooterColorChoice).click();
     }
-    public void secondScooterColor(){
+
+    public void secondScooterColor() {
         driver.findElement(secondScooterColorChoice).click();
     }
-    public void writeComment(String comment){
+
+    public void writeComment(String comment) {
         driver.findElement(commentForCourier).click();
         driver.findElement(commentForCourier).sendKeys(comment);
     }
-    public void orderScooter(){
+
+    public void orderScooter() {
         driver.findElement(clickOrderButton).click();
         driver.findElement(confirmationOfOrder).click();
     }
-    public void orderConfirmSuccessfull(){
-        driver.findElement(orderConfirm);
-        Assert.assertEquals("Заказ оформлен", driver.findElement(orderConfirm).getText());
+
+    public String orderConfirmSuccessfull() {
+        return driver.findElement(orderConfirm).getText();
     }
 
 }

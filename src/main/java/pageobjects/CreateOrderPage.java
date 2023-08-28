@@ -1,22 +1,22 @@
 package pageobjects;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 
 import java.time.Duration;
 
 public class CreateOrderPage {
     WebDriver driver;
-    static final int driverDuration = 10;
-    static final String driverSite = "https://qa-scooter.praktikum-services.ru/";
-    public CreateOrderPage(WebDriver driver){
+    static final int DRIVER_DURATION = 10;
+    static final String DRIVER_SITE = "https://qa-scooter.praktikum-services.ru/";
+
+    public CreateOrderPage(WebDriver driver) {
         this.driver = driver;
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(driverDuration)); //испольуем ожидание
-        driver.get(driverSite);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(DRIVER_DURATION)); //испольуем ожидание
+        driver.get(DRIVER_SITE);
     }
+
     //Нажимаем на кнопку "Имя" и вводим своё имя
     private By nameElement = By.xpath(".//div[@class='Input_InputContainer__3NykH']/input[@placeholder='* Имя']");
     //Нажимаем на кнопку "Фамилия" и вводим свою фамилию
@@ -39,54 +39,115 @@ public class CreateOrderPage {
     //Кнопка принятия куки
     private By cookieButton = By.xpath(".//button[contains(@class,'CookieButton')]");
     private By faqButton = By.xpath(".//div[contains(@id, 'accordion__heading-0')]");
+    private By faqButtonText = By.xpath(".//div/p[contains(text(),'Сутки')]");
     private By faqButtonSecond = By.xpath(".//div[contains(@id,'accordion__heading-1')]");
-    public void ifCookieButtonExists(){
-        if (driver.findElements(cookieButton).size() == 1){
+    private By faqButtonTextSecond = By.xpath(".//div/p[contains(text(),'Пока что у нас так')]");
+    private By faqButtonThird = By.xpath(".//div[contains(@id,'accordion__heading-2')]");
+    private By faqButtonTextSThird = By.xpath(".//div/p[contains(text(),'Допустим, вы оформляете заказ на 8 мая')]");
+    private By faqButtonFourth = By.xpath(".//div[contains(@id,'accordion__heading-3')]");
+    private By faqButtonTextFourth = By.xpath(".//div/p[contains(text(),'Только начиная с завтрашнего дня')]");
+    private By faqButtonFifth = By.xpath(".//div[contains(@id,'accordion__heading-4')]");
+    private By faqButtonTextFifth = By.xpath(".//div/p[contains(text(),'Пока что нет!')]");
+    private By faqButtonSixth = By.xpath(".//div[contains(@id,'accordion__heading-5')]");
+    private By faqButtonTextSixth = By.xpath(".//div/p[contains(text(),'Самокат приезжает к вам с полной зарядкой')]");
+    private By faqButtonSeventh = By.xpath(".//div[contains(@id,'accordion__heading-6')]");
+    private By faqButtonTextSeventh = By.xpath(".//div/p[contains(text(),'Да, пока самокат')]");
+    private By faqButtonEighth = By.xpath(".//div[contains(@id,'accordion__heading-7')]");
+    private By faqButtonTextEighth = By.xpath(".//div/p[contains(text(),'Да, обязательно')]");
+
+
+    public void ifCookieButtonExists() {
+        if (driver.findElements(cookieButton).size() == 1) {
             driver.findElement(cookieButton).click();
         }
     }
-    public void clickOrderButton(){
+
+    public void clickOrderButton() {
         driver.findElement(orderButton).click();
     }
-    public void clickSecondOrderButton(){
+
+    public void clickSecondOrderButton() {
         ifCookieButtonExists(); // кнопка с куки не позволяет нажать на нижнюю кнопку заказа.
         driver.findElement(secondOrderButton).click();
     }
-    public void enterNameAndLastName(String name, String lastName){
+
+    public void enterNameAndLastName(String name, String lastName) {
         driver.findElement(nameElement).click();
         driver.findElement(nameElement).sendKeys(name);
         driver.findElement(lastNameElement).click();
         driver.findElement(lastNameElement).sendKeys(lastName);
     }
 
-    public void enterAdress(String adress){
+    public void enterAdress(String adress) {
         driver.findElement(adressElement).click();
         driver.findElement(adressElement).sendKeys(adress);
     }
-    public void chooseAndergroundStation(){
+
+    public void chooseAndergroundStation() {
         driver.findElement(metroElement).click();
-        driver.findElement(chooseMetroElement ).click();
+        driver.findElement(chooseMetroElement).click();
     }
 
-    public void chooseSecondAndergroundStation(){
+    public void chooseSecondAndergroundStation() {
         driver.findElement(metroElement).click();
         driver.findElement(chooseSecondMetroElement).click();
     }
 
-    public void textPhoneNumber(String number){
+    public void textPhoneNumber(String number) {
         driver.findElement(numberElement).click();
         driver.findElement(numberElement).sendKeys(number);
     }
-    public void moveToAnotherPage(){
+
+    public void moveToAnotherPage() {
         driver.findElement(clickNext).click();
     }
-    public void faqButtonExist(){
+
+    public String faqButtonExist() {
         driver.findElement(faqButton).click();
-        Assert.assertEquals("Сутки — 400 рублей. Оплата курьеру — наличными или картой.", driver.findElement(faqButton).getText());
+        driver.findElement(faqButtonText).click(); // клики для скролла страницы до текста, иначе не срабатывает .getText и тест падает
+        return driver.findElement(faqButtonText).getText();
     }
-    public void SecondFaqButtonExist(){
+
+    public String secondFaqButtonExist() {
         driver.findElement(faqButtonSecond).click();
-        Assert.assertEquals("Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.", driver.findElement(faqButtonSecond).getText());
+        driver.findElement(faqButtonTextSecond).click();
+        return driver.findElement(faqButtonTextSecond).getText();
+    }
+
+    public String thirdFaqButtonExist() {
+        driver.findElement(faqButtonThird).click();
+        driver.findElement(faqButtonTextSThird).click();
+        return driver.findElement(faqButtonTextSThird).getText();
+    }
+
+    public String fourthFaqButtonExist() {
+        driver.findElement(faqButtonFourth).click();
+        driver.findElement(faqButtonTextFourth).click();
+        return driver.findElement(faqButtonTextFourth).getText();
+    }
+
+    public String fifthFaqButtonExist() {
+        driver.findElement(faqButtonFifth).click();
+        driver.findElement(faqButtonTextFifth).click();
+        return driver.findElement(faqButtonTextFifth).getText();
+    }
+
+    public String sixthFaqButtonExist() {
+        driver.findElement(faqButtonSixth).click();
+        driver.findElement(faqButtonTextSixth).click();
+        return driver.findElement(faqButtonTextSixth).getText();
+    }
+
+    public String seventhFaqButtonExist() {
+        driver.findElement(faqButtonSeventh).click();
+        driver.findElement(faqButtonTextSeventh).click();
+        return driver.findElement(faqButtonTextSeventh).getText();
+    }
+
+    public String eighthFaqButtonExist() {
+        driver.findElement(faqButtonEighth).click();
+        driver.findElement(faqButtonTextEighth).click();
+        return driver.findElement(faqButtonTextEighth).getText();
     }
 
 
