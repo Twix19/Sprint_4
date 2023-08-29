@@ -103,48 +103,56 @@ public class CreateOrderPage {
     }
 
     public String faqButtonExist() {
+        ifCookieButtonExists();
         driver.findElement(faqButton).click();
         driver.findElement(faqButtonText).click(); // клики для скролла страницы до текста, иначе не срабатывает .getText и тест падает
         return driver.findElement(faqButtonText).getText();
     }
 
     public String secondFaqButtonExist() {
+        ifCookieButtonExists();
         driver.findElement(faqButtonSecond).click();
         driver.findElement(faqButtonTextSecond).click();
         return driver.findElement(faqButtonTextSecond).getText();
     }
 
     public String thirdFaqButtonExist() {
+        ifCookieButtonExists();
         driver.findElement(faqButtonThird).click();
         driver.findElement(faqButtonTextSThird).click();
         return driver.findElement(faqButtonTextSThird).getText();
     }
 
     public String fourthFaqButtonExist() {
+        ifCookieButtonExists();
         driver.findElement(faqButtonFourth).click();
         driver.findElement(faqButtonTextFourth).click();
         return driver.findElement(faqButtonTextFourth).getText();
     }
 
     public String fifthFaqButtonExist() {
+        ifCookieButtonExists();
         driver.findElement(faqButtonFifth).click();
         driver.findElement(faqButtonTextFifth).click();
         return driver.findElement(faqButtonTextFifth).getText();
     }
 
     public String sixthFaqButtonExist() {
+        ifCookieButtonExists();
         driver.findElement(faqButtonSixth).click();
         driver.findElement(faqButtonTextSixth).click();
         return driver.findElement(faqButtonTextSixth).getText();
     }
 
     public String seventhFaqButtonExist() {
+        ifCookieButtonExists();
         driver.findElement(faqButtonSeventh).click();
         driver.findElement(faqButtonTextSeventh).click();
         return driver.findElement(faqButtonTextSeventh).getText();
     }
 
     public String eighthFaqButtonExist() {
+        ifCookieButtonExists();
         driver.findElement(faqButtonEighth).click();
         driver.findElement(faqButtonTextEighth).click();
         return driver.findElement(faqButtonTextEighth).getText();
